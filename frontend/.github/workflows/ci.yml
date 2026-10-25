@@ -1,0 +1,44 @@
+name: CogniDesk CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  backend-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Verify Imports
+        env:
+          DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/cognidesk
+          OPENROUTER_API_KEY: "dummy-key-for-testing"
+        run: |
+          cd backend
+          python -c "import app.main; print('Backend app imports successfully!')"
+
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm run build
