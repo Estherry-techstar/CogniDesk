@@ -1,0 +1,26 @@
+[
+  {
+    "question": "I am getting a connection timeout when connecting to the VPN.",
+    "expected_source": "test_vpn_policy.md"
+  },
+  {
+    "question": "How do I get the Wi-Fi password for my guest?",
+    "expected_source": "guest_wifi.md"
+  },
+  {
+    "question": "My laptop screen is cracked and I need a replacement.",
+    "expected_source": "laptop_replacement.md"
+  },
+  {
+    "question": "I need to set up the Microsoft Authenticator app.",
+    "expected_source": "mfa_setup.md"
+  },
+  {
+    "question": "Someone sent me an email asking for my password, what do I do?",
+    "expected_source": "phishing_reporting.md"
+  },
+  {
+    "question": "How do I connect to the printer on the 3rd floor?",
+    "expected_source": "pronter_connectivity.md"
+  }
+]
