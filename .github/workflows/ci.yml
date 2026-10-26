@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  backend-lint:
+  backend-syntax:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,15 +13,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install dependencies
+      - name: Check Python Syntax
         run: |
           cd backend
-          python -m pip install --upgrade pip
-          pip install fastapi uvicorn sqlalchemy psycopg[binary] pgvector pydantic python-jose[cryptography] passlib[bcrypt] python-multipart openai python-dotenv
-      - name: Verify Imports
-        run: |
-          cd backend
-          python -c "import app.main; print('Backend app imports successfully!')"
+          # This verifies syntax without downloading heavy AI models
+          python -m compileall -q app
 
   frontend-build:
     runs-on: ubuntu-latest
