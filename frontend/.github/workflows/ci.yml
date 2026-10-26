@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  backend-syntax:
+  backend-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,7 +16,7 @@ jobs:
       - name: Check Python Syntax
         run: |
           cd backend
-          # Verifies code compiles without downloading heavy AI models
+          # Verifies code syntax without downloading heavy AI models
           python -m compileall app
 
   frontend-build:
