@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -26,10 +28,19 @@ services:
     environment:
       - DATABASE_URL=postgresql+psycopg://postgres:postgres@db:5432/cognidesk
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-
     depends_on:
       db:
         condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: cognidesk_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
